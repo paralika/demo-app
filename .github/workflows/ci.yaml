@@ -43,7 +43,7 @@ jobs:
         git config --global user.email "no-reply@akuity.io"
         git clone https://bot:${{ secrets.DEPLOY_PAT }}@github.com/paralika/demo-app-deploy.git
         cd demo-app-deploy/env/dev
-        kustomize edit set image ghcr.io/argocon2022-workshop/demo-app=ghcr.io/paralika/demo-app:13bf62a15195621b111375ee98aad50574fce4b6
-        git commit -a -m "Deploy dev: ghcr.io/paralika/demo-app:13bf62a15195621b111375ee98aad50574fce4b6"
-        git notes append -m "image: ghcr.io/paralika/demo-app:13bf62a15195621b111375ee98aad50574fce4b6"
+        kustomize edit set image ghcr.io/argocon2022-workshop/demo-app=ghcr.io/paralika/demo-app:${{ github.sha }}
+        git commit -a -m "Deploy dev: ghcr.io/paralika/demo-app:${{ github.sha }}"
+        git notes append -m "image: ghcr.io/paralika/demo-app:${{ github.sha }}"
         git push origin "refs/notes/*" --force && git push --force
